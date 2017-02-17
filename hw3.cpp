@@ -180,9 +180,9 @@ int main() {
 
 
     if(A_win1 > A_win2) {
-        cout << "Strategy 1 is better than strategy 2";
+        cout << "Strategy 1 is better than strategy 2\n";
     } else {
-        cout << "Strategy 2 is better than strategy 1";
+        cout << "Strategy 2 is better than strategy 1\n";
     }
 
     return 0;
@@ -485,11 +485,19 @@ void takeATurn(void) {
 
         case 'a':
             Aaron_shoots1(B_alive, C_alive);
-            whoseTurn = 'b';
+            if(B_alive) {
+                whoseTurn = 'b';
+            } else {
+                whoseTurn = 'c';
+            }
             break;
         case 'b':
             Bob_shoots(A_alive, C_alive);
+            if(C_alive) {
             whoseTurn = 'c';
+            } else {
+                whoseTurn = 'a';
+            }
             break;
         case 'c':
             Charlie_shoots(A_alive, B_alive);
