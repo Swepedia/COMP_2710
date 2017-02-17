@@ -1,13 +1,17 @@
 //@author: Maxwell Heeschen
 //@AuburnUserID: mch0048
 //@filename: hw3.cpp
-//To compile type:
-//    "g++ -std=c++11 -o hw3 hw3.cpp"
+//To compile:
+//      "g++ -std=c++11 -o hw3 hw3.cpp"
+//
+//resources:
+//      I used the method for getting random numbers as linked to by Zhitao Gong.
 
 #include<iostream>
 #include<cassert>
-#include<cstdlib>
+#include<stdlib.h>
 #include<random>
+#include<ctime>
 using namespace std;
 
 bool at_least_two_alive(bool A_alive, bool B_alive, bool C_alive);
@@ -84,6 +88,7 @@ int main() {
     test_Charlie_shoots();
     wait();
 
+    firstShotBeenFired = false;
     test_Aaron_shoots2();
     wait();
 }
@@ -146,6 +151,8 @@ void test_at_least_two_alive(void) {
 
 void Aaron_shoots1(bool& B_alive, bool& C_alive) {
     double odds = dis(gen); 
+    //srand(time(0));
+    //double odds = (RAND_MAX - rand())/static_cast<double>(RAND_MAX);
     bool hit = false;
 
     //implements the 1/3 accuracy of Aaron
@@ -162,6 +169,8 @@ void Aaron_shoots1(bool& B_alive, bool& C_alive) {
 }
 
 void test_Aaron_shoots1(void) {
+    B_alive = true;
+    C_alive = true;
     cout << "Unit Testing 2: Function Aaron_shoots1(Bob_alive, Charlie_alive)\n";
 
     cout << "Case 1: Bob alive, Charlie alive\n";
@@ -201,6 +210,8 @@ void test_Aaron_shoots1(void) {
 
 void Bob_shoots(bool& A_alive, bool& C_alive) {
     double odds = dis(gen);
+    //srand(time(0));
+    //double odds = (RAND_MAX - rand())/static_cast<double>(RAND_MAX);
     bool hit = false;
 
     //implements 1/2 accuracy of Bob
@@ -217,6 +228,8 @@ void Bob_shoots(bool& A_alive, bool& C_alive) {
 }
 
 void test_Bob_shoots(void) {
+    A_alive = true;
+    C_alive = true;
     cout << "Unit Testing 3: Function Bob_shoots(Aaron_alive, Charlie_alive\n";
 
     cout << "Case 1: Aaron alive, Charlie alive\n";
@@ -263,6 +276,8 @@ void Charlie_shoots(bool& A_alive, bool& B_alive) {
 }
 
 void test_Charlie_shoots(void) {
+    A_alive = true;
+    B_alive = true;
     cout << "Unit Testing 4: Function Charlie_shoots(Aaron_alive, Bob_alive)\n";
 
     cout << "Case 1: Aaron is alive, Bob is alive\n";
@@ -301,6 +316,8 @@ void test_Charlie_shoots(void) {
 
 void Aaron_shoots2(bool& B_alive, bool& C_alive) {
     double odds = dis(gen);
+    //srand(time(0));
+    //double odds = (RAND_MAX - rand())/static_cast<double>(RAND_MAX);
     bool hit = false;
 
     //implements 1/3 accuracy of Aaron
@@ -308,7 +325,7 @@ void Aaron_shoots2(bool& B_alive, bool& C_alive) {
         hit = true;
     }
 
-    if(!firstShotBeenFired) {
+    if(firstShotBeenFired) {
         if(C_alive && hit) {
             C_alive = false;
         }
@@ -320,6 +337,9 @@ void Aaron_shoots2(bool& B_alive, bool& C_alive) {
 }
 
 void test_Aaron_shoots2(void) {
+    firstShotBeenFired = false;
+    B_alive = true;
+    C_alive = true;
     cout << "Unit Testing 5: Function Aaron_shoots2(Bob_alive, Charlie_alive)\n";
 
     cout << "Case 1: Bob alive, Charlie alive\n";
