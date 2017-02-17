@@ -2,11 +2,12 @@
 //@AuburnUserID: mch0048
 //@filename: hw3.cpp
 //To compile type:
-//    "g++ -o hw3 hw3.cpp"
+//    "g++ -std=c++11 -o hw3 hw3.cpp"
 
 #include<iostream>
 #include<cassert>
 #include<cstdlib>
+#include<random>
 using namespace std;
 
 bool at_least_two_alive(bool A_alive, bool B_alive, bool C_alive);
@@ -64,6 +65,9 @@ bool A_alive = true;
 bool B_alive = true;
 bool C_alive = true;
 const int numOfSimulations = 10000;
+random_device rd;
+mt19937 gen(rd());
+uniform_real_distribution<> dis(0,1);
 
 int main() {
     cout << "*** Welcome to Maxwell's Duel Simulator ***\n";
@@ -141,11 +145,11 @@ void test_at_least_two_alive(void) {
 }
 
 void Aaron_shoots1(bool& B_alive, bool& C_alive) {
-    int odds = rand() % 300;
+    double odds = dis(gen); 
     bool hit = false;
 
     //implements the 1/3 accuracy of Aaron
-    if(odds < 100) {
+    if(odds < 0.33) {
         hit = true;
     }
 
@@ -196,11 +200,11 @@ void test_Aaron_shoots1(void) {
 }
 
 void Bob_shoots(bool& A_alive, bool& C_alive) {
-    int odds = rand() % 200;
+    double odds = dis(gen);
     bool hit = false;
 
     //implements 1/2 accuracy of Bob
-    if(odds < 100) {
+    if(odds < 0.5) {
         hit = true;
     }
 
@@ -296,11 +300,11 @@ void test_Charlie_shoots(void) {
 }
 
 void Aaron_shoots2(bool& B_alive, bool& C_alive) {
-    int odds = rand() % 300;
+    double odds = dis(gen);
     bool hit = false;
 
     //implements 1/3 accuracy of Aaron
-    if(odds < 100) {
+    if(odds < 0.33) {
         hit = true;
     }
 
@@ -356,5 +360,4 @@ void test_Aaron_shoots2(void) {
 void wait() {
     cout << "Press any key to continue...";
     cin.ignore().get();
-    cout << "\n";
 }
