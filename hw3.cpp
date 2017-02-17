@@ -12,6 +12,7 @@
 #include<stdlib.h>
 #include<random>
 #include<ctime>
+#include<linux/random.h>
 using namespace std;
 
 bool at_least_two_alive(bool A_alive, bool B_alive, bool C_alive);
@@ -63,12 +64,21 @@ void Aaron_shoots2(bool& B_alive, bool& C_alive);
 
 void test_Aaron_shoots2(void);
 
+void waitForKey(void);
+void takeATurn(void);
+char checkWinner(void);
+double percentage(int wins);
 
+char whoseTurn = 'a';
 bool firstShotBeenFired = false;
 bool A_alive = true;
 bool B_alive = true;
 bool C_alive = true;
+
 const int numOfSimulations = 10000;
+const double A_ACCURACY = 1.0/3.0;
+const double B_ACCURACY = 0.5;
+
 random_device rd;
 mt19937 gen(rd());
 uniform_real_distribution<> dis(0,1);
@@ -77,20 +87,105 @@ int main() {
     cout << "*** Welcome to Maxwell's Duel Simulator ***\n";
     
     test_at_least_two_alive();
-    wait();
+    waitForKey();
 
     test_Aaron_shoots1();
-    wait();
+    waitForKey();
 
     test_Bob_shoots();
-    wait();
+    waitForKey();
 
     test_Charlie_shoots();
-    wait();
+    waitForKey();
 
     firstShotBeenFired = false;
     test_Aaron_shoots2();
-    wait();
+    waitForKey();
+
+    cout << "Ready to test strategy 1 (run 10,000 times):\n";
+    waitForKey();
+
+    A_alive = true;
+    B_alive = true;
+    C_alive = true;
+    int A_win1 = 0;
+    int B_win1 = 0;
+    int C_win1 = 0;
+    for(int i = 0; i < numOfSimulations; i++) {
+        do {
+            takeATurn();
+        }
+        while(at_least_two_alive(A_alive, B_alive, C_alive));
+
+        char result = checkWinner();
+        if(result == 'a') {
+            A_win1++;
+        }
+        else if(result == 'b') {
+            B_win1++;
+        } else {
+            C_win1++;
+        }
+        A_alive = true;
+        B_alive = true;
+        C_alive = true;
+    }
+
+    cout << "Aaron won " << A_win1 << "/" << numOfSimulations << " duels or " << percentage(A_win1) << "%\n";
+    cout << "Bob won " << B_win1 << "/" << numOfSimulations << " duels or " << percentage(B_win1) << "%\n";
+    cout << "Charlie won " << C_win1 << "/" << numOfSimulations << " duels or " << percentage(C_win1) << "%\n";
+
+
+    cout << "Ready to test strategy 2 (run 10,000 times):\n";
+    waitForKey();
+
+    A_alive = true;
+    B_alive = true;
+    C_alive = true;
+    firstShotBeenFired = false;
+    whoseTurn = 'a';
+    int A_win2 = 0;
+    int B_win2 = 0;
+    int C_win2 = 0;
+
+
+    for(int i = 0; i < numOfSimulations; i++) {
+        Aaron_shoots2(B_alive, C_alive);
+        whoseTurn = 'b';
+
+        do {
+            takeATurn();
+        }
+        while(at_least_two_alive(A_alive, B_alive, C_alive));
+
+        char result = checkWinner();
+        if(result == 'a') {
+            A_win2++;
+        }
+        else if(result == 'b') {
+            B_win2++;
+        } else {
+            C_win2++;
+        }
+        A_alive = true;
+        B_alive = true;
+        C_alive = true;
+        firstShotBeenFired = false;
+        whoseTurn = 'a';
+    }
+
+    cout << "Aaron won " << A_win2 << "/" << numOfSimulations << " duels or " << percentage(A_win2) << "%\n";
+    cout << "Bob won " << B_win2 << "/" << numOfSimulations << " duels or " << percentage(B_win2) << "%\n";
+    cout << "Charlie won " << C_win2 << "/" << numOfSimulations << " duels or " << percentage(C_win2) << "%\n";
+
+
+    if(A_win1 > A_win2) {
+        cout << "Strategy 1 is better than strategy 2";
+    } else {
+        cout << "Strategy 2 is better than strategy 1";
+    }
+
+    return 0;
 }
 
 bool at_least_two_alive(bool A_alive, bool B_alive, bool C_alive) {
@@ -151,12 +246,13 @@ void test_at_least_two_alive(void) {
 
 void Aaron_shoots1(bool& B_alive, bool& C_alive) {
     double odds = dis(gen); 
-    //srand(time(0));
+    //srand(system("getrandom"));
     //double odds = (RAND_MAX - rand())/static_cast<double>(RAND_MAX);
     bool hit = false;
+    //cout << odds;
 
     //implements the 1/3 accuracy of Aaron
-    if(odds < 0.33) {
+    if(odds < A_ACCURACY) {
         hit = true;
     }
 
@@ -213,9 +309,10 @@ void Bob_shoots(bool& A_alive, bool& C_alive) {
     //srand(time(0));
     //double odds = (RAND_MAX - rand())/static_cast<double>(RAND_MAX);
     bool hit = false;
+    //cout << odds;
 
     //implements 1/2 accuracy of Bob
-    if(odds < 0.5) {
+    if(odds < B_ACCURACY) {
         hit = true;
     }
 
@@ -319,9 +416,10 @@ void Aaron_shoots2(bool& B_alive, bool& C_alive) {
     //srand(time(0));
     //double odds = (RAND_MAX - rand())/static_cast<double>(RAND_MAX);
     bool hit = false;
+    //cout << odds;
 
     //implements 1/3 accuracy of Aaron
-    if(odds < 0.33) {
+    if(odds < A_ACCURACY) {
         hit = true;
     }
 
@@ -377,7 +475,39 @@ void test_Aaron_shoots2(void) {
     firstShotBeenFired = false;
 }
 
-void wait() {
+void waitForKey(void) {
     cout << "Press any key to continue...";
     cin.ignore().get();
+}
+
+void takeATurn(void) {
+    switch(whoseTurn) {
+
+        case 'a':
+            Aaron_shoots1(B_alive, C_alive);
+            whoseTurn = 'b';
+            break;
+        case 'b':
+            Bob_shoots(A_alive, C_alive);
+            whoseTurn = 'c';
+            break;
+        case 'c':
+            Charlie_shoots(A_alive, B_alive);
+            whoseTurn = 'a';
+            break;
+    }
+}
+
+char checkWinner(void) {
+    if(A_alive) {
+        return 'a';
+    }
+    else if(B_alive) {
+        return 'b';
+    }
+    return 'c';
+}
+
+double percentage(int wins) {
+    return ((double)wins/(double)numOfSimulations) * 100.0;
 }
