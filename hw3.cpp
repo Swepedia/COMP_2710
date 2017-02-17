@@ -11,8 +11,6 @@
 #include<cassert>
 #include<stdlib.h>
 #include<random>
-#include<ctime>
-#include<linux/random.h>
 using namespace std;
 
 bool at_least_two_alive(bool A_alive, bool B_alive, bool C_alive);
