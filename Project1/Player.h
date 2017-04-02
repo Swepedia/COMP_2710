@@ -2,6 +2,8 @@
 //@AuburnUserID: mch0048
 //@filename: Player.h
 
+#include<random>
+
 void Player(void);
 /*
  * Constructor for Player
@@ -12,27 +14,28 @@ void step(void);
  * Includes the code for determining the type of encounter to have
  *
  * Decrements the stepsRemaining
+ * Decrements the timeLeft
  */
 
 void searchMoney(void);
 /*
- * Consumes time to search for a random amount of money within a range
+ * Consumes timeLeft to search for a random amount of money within a range
  *
- * Decrements time
+ * Decrements timeLeft
  * Increments money
  */
 
 void readPaper(void);
 /*
- * Consumes time to increase intelligence by random amount witin a range
+ * Consumes timeLeft to increase intelligence by random amount witin a range
  *
- * Decrements time
+ * Decrements timeLeft
  * Increment money
  */
 
 void viewCharacter(void);
 /*
- * Prints out information about current stats of stepsRemaining, time, intelligence, and money
+ * Prints out information about current stats of stepsRemaining, timeLeft, intelligence, and money
  */
 
 void quitToMainMenu(void);
