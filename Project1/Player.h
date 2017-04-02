@@ -39,11 +39,6 @@ void viewCharacter(void);
  * Prints out information about current stats of stepsRemaining, timeLeft, intelligence, and money
  */
 
-void quitToMainMenu(void);
-/*
- * Exits to the main menu
- */
-
 int tallyScore(void);
 /*
  * Returns the total score for this Player

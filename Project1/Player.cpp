@@ -51,9 +51,6 @@ void viewCharacter() {
     cout << "Money: $" << money <<".00\n\n";
 }
 
-void quitToMainMenu() {
-}
-
 int tallyScore() {
     return timeLeft + intelligence + money;
 }
