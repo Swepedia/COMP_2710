@@ -31,9 +31,12 @@ void step() {
 
 void searchMoney() {
     money += rand() % 3;
+    timeLeft --;
 }
 
 void readPaper() {
+    intelligence += rand() % 3;
+    timeLeft --;
 }
 
 void viewCharacter() {
