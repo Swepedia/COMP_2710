@@ -2,6 +2,11 @@
 //@AuburnUserID: mch0048
 //@filename: Player.h
 
+void Player(void);
+/*
+ * Constructor for Player
+ */
+
 void step(void);
 /*
  * Includes the code for determining the type of encounter to have
