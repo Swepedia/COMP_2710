@@ -35,6 +35,7 @@ string name = "";
 int option;
 
 int main() {
+    srand(time(0));
     cout << "What is your name?\n";
     cin >> name;
     cout << "==========================================================\n";
