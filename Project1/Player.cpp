@@ -30,6 +30,7 @@ void step() {
 }
 
 void searchMoney() {
+    money += rand() % 3;
 }
 
 void readPaper() {
