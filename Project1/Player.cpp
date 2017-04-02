@@ -30,3 +30,22 @@ void step() {
 
 void searchMoney() {
 }
+
+void readPaper() {
+}
+
+void viewCharacter() {
+}
+
+void quitToMainMenu() {
+}
+
+int tallyScore() {
+    return time + intelligence + money;
+}
+
+bool isAlive() {
+    if(time > 0 && intelligence > 0 && money > 0)
+        return false;
+    return true;
+}
