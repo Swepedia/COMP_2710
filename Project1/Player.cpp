@@ -2,16 +2,17 @@
 //@AuburnUserID: mch0048
 //@filename: Player.cpp
 
-#include<Player.h>
+#include "Player.h"
 #include<random>
+using namespace std;
 
-private final int RANGE_LOWER = 8;
-private final int RANGE_UPPER = 25;
+const int RANGE_LOWER = 8;
+const int RANGE_UPPER = 25;
 
-private int stepsRemaining;
-private int time;
-private int intelligence;
-private int money;
+int stepsRemaining;
+int timeLeft;
+int intelligence;
+int money;
 
 random_device rd;
 mt19937 gen(rd());
@@ -19,9 +20,9 @@ uniform_real_distribution<> dis(RANGE_LOWER, RANGE_UPPER);
 
 void Player() {
     stepsRemaining = 20;
-    time = dis(gen);
-    intelligence = dis(gen);
-    money = dis(gen);
+    timeLeft = static_cast<int>(dis(gen));
+    intelligence = static_cast<int>(dis(gen));
+    money = static_cast<int>(dis(gen));
 }
 
 void step() {
@@ -41,11 +42,11 @@ void quitToMainMenu() {
 }
 
 int tallyScore() {
-    return time + intelligence + money;
+    return timeLeft + intelligence + money;
 }
 
 bool isAlive() {
-    if(time > 0 && intelligence > 0 && money > 0)
+    if(timeLeft > 0 && intelligence > 0 && money > 0)
         return false;
     return true;
 }
