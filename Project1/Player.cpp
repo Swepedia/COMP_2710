@@ -4,6 +4,7 @@
 
 #include "Player.h"
 #include<random>
+#include<iostream>
 using namespace std;
 
 const int RANGE_LOWER = 8;
@@ -40,6 +41,14 @@ void readPaper() {
 }
 
 void viewCharacter() {
+    cout << "=============\n";
+    cout << "  Character\n";
+    cout << "=============\n\n";
+
+    cout << "Steps-to-finish: " << stepsRemaining << endl;
+    cout << "Time: " << timeLeft << endl;
+    cout << "Intelligence: " << intelligence << endl;
+    cout << "Money: $" << money <<".00\n\n";
 }
 
 void quitToMainMenu() {

@@ -3,6 +3,7 @@
 //@filename: Player.h
 
 #include<random>
+#include<iostream>
 
 void Player(void);
 /*
