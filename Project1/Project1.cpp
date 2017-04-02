@@ -7,7 +7,7 @@
 
 #include<iostream>
 #include<string>
-using namespace std
+using namespace std;
 
 void startGame(void);
 /*
@@ -31,7 +31,7 @@ bool continuePlaying = true;
 string name = "";
 int option;
 
-int Main() {
+int main() {
     cout << "What is your name?\n";
     cin >> name;
     cout << "==========================================================\n";
@@ -42,14 +42,15 @@ int Main() {
     cout << "2) View the high scores\n";
     cout << "3) Quit\n";
 
-    cout << "Pick an option: ";
-    cin >> option;
-    cout << endl;
     bool temp = true;
     while(temp) {
+        cout << "\nPick an option: ";
+        cin >> option;
+        cout << endl;
+
         switch(option) {
             case 1:
-                //make Player
+                //make Player and start game
                 temp = false;
                 break;
             case 2:
@@ -63,7 +64,6 @@ int Main() {
                 cout << "Input a valid option.\n";
                 break;
         }
-    }
 
     return 0;
 }
