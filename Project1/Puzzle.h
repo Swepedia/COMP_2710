@@ -7,15 +7,7 @@
 #include<iostream>
 using namespace std;
 
-class Puzzle
-{
-public:
-Puzzle(void);
-/*
- * Constructor
- */
-
-void getPuzzle(void);
+int getPuzzle(void);
 /*
  * Prints out a random puzzle
  *
@@ -26,5 +18,4 @@ bool puzzleCheck(std::string answer);
 /*
  * Checks if the given answer for the puzzle is correct
  */
-bool puzzleCheck(std::string answer);
-};
+bool puzzleCheck(std::string answer, int num);

@@ -21,33 +21,34 @@ string a3 = "reflection";
 string p4 = "What belongs to you, but others use it more than you do?";
 string a4 = "name";
 
-Puzzle::Puzzle() {
-    puzzle = 99;
-}
-
-void Puzzle::getPuzzle() {
+int getPuzzle() {
     puzzle = rand() % 5;
     switch(puzzle) {
         case 0:
             cout << p0;
+            return puzzle;
             break;
         case 1:
             cout << p1;
+            return puzzle;
             break;
         case 2:
             cout << p2;
+            return puzzle;
             break;
         case 3:
             cout << p3;
+            return puzzle;
             break;
         case 4:
             cout << p4;
+            return puzzle;
             break;
     }
 }
 
-bool Puzzle::puzzleCheck(string answer) {
-    switch(puzzle) {
+bool puzzleCheck(string answer, int num) {
+    switch(num) {
         case 0:
             if(p0.compare(answer) == 0) 
                 return true;

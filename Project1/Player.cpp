@@ -3,6 +3,7 @@
 //@filename: Player.cpp
 
 #include "Player.h"
+#include "Puzzle.h"
 #include<random>
 #include<iostream>
 #include<cstdlib>
@@ -32,9 +33,27 @@ void Player::step() {
     int encounter = decideEncounter();
     int timeLost;
     int intelligenceGained;
+    int puzzle;
+    int succeed;
+    string answer;
 
     switch(encounter) {
         case 1:
+            cout << "It's a puzzle!\n\n";
+            puzzle = getPuzzle();
+            cin >> answer;
+            succeed = false;
+            succeed = puzzleCheck(answer, puzzle);
+            if(succeed) {
+                cout << "Congratulations, you get some int\n";
+                cout << "+4 int\n";
+                intelligence += 4;
+            } else {
+                cout << "Incorrect!\n";
+                cout << "-2 bucks, -1 time\n";
+                money -= 2;
+                timeLeft -= 1;
+            }
             break;
         case 2:
             timeLost = (rand() % 4) + 1;

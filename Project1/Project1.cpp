@@ -57,10 +57,47 @@ int main() {
         cout << endl;
 
         
-        Player player;
+        Player *player = new Player();
         switch(option) {
             case 1:
+            {
                 //Start game
+                int choice = 0;
+                bool play = true;
+                while(play) {
+                    cout << "You have:\n\n";
+                    player->viewCharacter();
+                    cout << "1) Move(-time)\n";
+                    cout << "2) Read technical papers (+int -time)\n";
+                    cout << "3) Search for money (-time +money)\n";
+                    cout << "4) View character\n";
+                    cout << "5) Quit to main menu\n\n";
+                    cout << "please choose an action: ";
+                    cin >> choice;
+                    switch(choice) {
+                        case 1:
+                            player -> step();
+                            break;
+                        case 2:
+                            player -> readPaper();
+                            break;
+                        case 3:
+                            player -> searchMoney();
+                            break;
+                        case 4:
+                            player -> viewCharacter();
+                            cout << endl;
+                            break;
+                        case 5:
+                            play = false;
+                            break;
+                        default:
+                            cout << "Input a valid option.\n";
+                            break;
+
+                    }
+                }
+            }
                 break;
             case 2:
                 //view high scores
