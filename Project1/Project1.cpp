@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "EncounterDecider.h"
 #include "Puzzle.h"
+#include "FileAccessor.h"
 using namespace std;
 
 void startGame(void);
