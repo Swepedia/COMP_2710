@@ -4,8 +4,9 @@
 
 #include<cstdlib>
 #include<string>
+#include<iostream>
 
-Puzzle(void);
+void Puzzle(void);
 /*
  * Constructor
  */
@@ -17,7 +18,7 @@ void getPuzzle(void);
  * Assigns puzzle number to puzzle
  */
 
-bool puzzleCheck(string answer);
+bool puzzleCheck(std::string answer);
 /*
  * Checks if the given answer for the puzzle is correct
  */
