@@ -61,4 +61,5 @@ bool isAlive(void);
 /*
  * Returns whether or no this Player is alive
  */
+bool hasWon(void);
 };

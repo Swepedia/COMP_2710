@@ -97,11 +97,22 @@ int main() {
                             break;
 
                     }
+                    if(!(player -> isAlive())) {
+                        cout << "You have died!\n";
+                        changeHighScore(player -> tallyScore());
+                        play = false;
+                    }
+                    if(player -> hasWon()) {
+                        cout << "Congratulations! You win!\n";
+                        changeHighScore(player -> tallyScore());
+                        play = false;
+                    }
                 }
             }
                 break;
             case 2:
                 //view high scores
+                getHighScores();
                 break;
             case 3:
                 //Quits the program

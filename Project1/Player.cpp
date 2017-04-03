@@ -108,3 +108,8 @@ bool Player::isAlive() {
         return false;
     return true;
 }
+bool Player::hasWon() {
+    if(stepsRemaining <= 0)
+        return true;
+    return false;
+}
