@@ -5,7 +5,7 @@
 #include<iostream>
 #include<fstream>
 
-void getHighScore(void);
+void getHighScores(void);
 /*
  * Gets the file highScores.txt and prints out the top 10 scores
  */

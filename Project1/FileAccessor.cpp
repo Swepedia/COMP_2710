@@ -11,7 +11,7 @@ using namespace std;
 ifstream inStream;
 ofstream outStream;
 
-void getHighScore() {
+void getHighScores() {
     cout << "=====================\n";
     cout << "     High Scores\n"
     cout << "=====================\n\n";
