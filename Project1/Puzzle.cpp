@@ -21,11 +21,11 @@ string a3 = "reflection";
 string p4 = "What belongs to you, but others use it more than you do?";
 string a4 = "name";
 
-void Puzzle() {
+Puzzle::Puzzle() {
     puzzle = 99;
 }
 
-void getPuzzle() {
+void Puzzle::getPuzzle() {
     puzzle = rand() % 5;
     switch(puzzle) {
         case 0:
@@ -46,7 +46,7 @@ void getPuzzle() {
     }
 }
 
-bool puzzleCheck(string answer) {
+bool Puzzle::puzzleCheck(string answer) {
     switch(puzzle) {
         case 0:
             if(p0.compare(answer) == 0) 

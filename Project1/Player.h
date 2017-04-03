@@ -5,8 +5,20 @@
 #include<random>
 #include<iostream>
 #include<cstdlib>
+using namespace std;
 
-void Player(void);
+class Player
+{
+    const int RANGE_LOWER = 8;
+    const int RANGE_UPPER = 25;
+
+    int stepsRemaining;
+    int timeLeft;
+    int intelligence;
+    int money;
+
+public:
+Player();
 /*
  * Constructor for Player
  */
@@ -49,4 +61,4 @@ bool isAlive(void);
 /*
  * Returns whether or no this Player is alive
  */
-
+};

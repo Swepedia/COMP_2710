@@ -56,9 +56,11 @@ int main() {
         cin >> option;
         cout << endl;
 
+        
+        Player player;
         switch(option) {
             case 1:
-                //make Player and start game
+                //Start game
                 break;
             case 2:
                 //view high scores
