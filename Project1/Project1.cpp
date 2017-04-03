@@ -11,6 +11,8 @@
 #include<string>
 #include<cstdlib>
 #include "Player.h"
+#include "EncounterDecider.h"
+#include "Puzzle.h"
 using namespace std;
 
 void startGame(void);
