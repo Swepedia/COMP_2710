@@ -46,12 +46,12 @@ int main() {
     cout << "                  Welcome, " << name << "\n";
     cout << "==========================================================\n\n";
     
-    cout << "1) Start a new game of Shelby Center and Dragons\n";
-    cout << "2) View the high scores\n";
-    cout << "3) Quit\n";
-
     //Main game loop
     while(true) {
+        cout << "1) Start a new game of Shelby Center and Dragons\n";
+        cout << "2) View the high scores\n";
+        cout << "3) Quit\n\n";
+
         cout << "\nPick an option: ";
         cin >> option;
         cout << endl;
