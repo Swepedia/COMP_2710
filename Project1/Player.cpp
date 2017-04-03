@@ -24,7 +24,7 @@ uniform_real_distribution<> dis(RANGE_LOWER, RANGE_UPPER);
 
 Player::Player() {
     stepsRemaining = 20;
-    timeLeft = static_cast<int>(dis(gen));
+    timeLeft = static_cast<int>(dis(gen) + 13);
     intelligence = static_cast<int>(dis(gen));
     money = static_cast<int>(dis(gen));
 }

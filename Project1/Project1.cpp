@@ -6,7 +6,7 @@
 //      g++ -std=c++11 -o Project1 Project1.cpp Player.cpp EncounterDecider.cpp Puzzle.cpp FileAccessor.cpp
 //Resources:
 //      I used a method for getting random numbers, which was liked to by Zhitao Gong
-//      I used the text book to figure out classes
+//      I used the text book to figure out classes, also to figure out strings
 
 #include<iostream>
 #include<string>
@@ -99,12 +99,12 @@ int main() {
                     }
                     if(!(player -> isAlive())) {
                         cout << "You have died!\n";
-                        changeHighScore(player -> tallyScore());
+                        changeHighScore(player -> tallyScore(), name);
                         play = false;
                     }
                     if(player -> hasWon()) {
                         cout << "Congratulations! You win!\n";
-                        changeHighScore(player -> tallyScore());
+                        changeHighScore(player -> tallyScore(), name);
                         play = false;
                     }
                 }
