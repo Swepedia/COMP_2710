@@ -2,6 +2,8 @@
 //@AuburnUserID: mch0048
 //@filename: DeciderEncounter.h
 
+#include<cstdlib>
+
 int decideEncounter(void);
 /*
  * Uses a random number to return what kind of encounter Player will have

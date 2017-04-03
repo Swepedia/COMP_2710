@@ -4,6 +4,7 @@
 
 #include<random>
 #include<iostream>
+#include<cstdlib>
 
 void Player(void);
 /*

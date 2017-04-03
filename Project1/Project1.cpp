@@ -9,6 +9,7 @@
 
 #include<iostream>
 #include<string>
+#include<cstdlib>
 #include "Player.h"
 using namespace std;
 

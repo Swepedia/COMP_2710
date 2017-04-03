@@ -5,6 +5,7 @@
 #include "Player.h"
 #include<random>
 #include<iostream>
+#include<cstdlib>
 using namespace std;
 
 const int RANGE_LOWER = 8;
