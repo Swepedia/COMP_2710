@@ -38,6 +38,9 @@ void Player::step() {
     string answer;
 
     switch(encounter) {
+        case 0:
+            stepsRemaining --;
+            timeLeft --;
         case 1:
             cout << "It's a puzzle!\n\n";
             puzzle = getPuzzle();
@@ -54,6 +57,8 @@ void Player::step() {
                 money -= 2;
                 timeLeft -= 1;
             }
+            stepsRemaining --;
+            timeLeft --;
             break;
         case 2:
             timeLost = (rand() % 4) + 1;
@@ -62,18 +67,21 @@ void Player::step() {
             cout << "You lose " << timeLost << " time, and gain " << intelligenceGained << " intelligence!\n";
             timeLeft -= timeLost;
             intelligence += intelligenceGained;
+            stepsRemaining --;
             break;
         case 3:
             timeLost = (rand() % 3) + 1;
             cout << "It's a grad student!\n";
             cout << "You lose " << timeLost << " time.\n";
             timeLeft -= timeLost;
+            stepsRemaining --;
             break;
         case 4:
             cout << "You get hit by gruntwork.\n";
             cout << "Yout lose 2 time but gain 7 bucks!\n";
             timeLeft -= 2;
             money += 7;
+            stepsRemaining --;
             break;
     }
 }
@@ -105,8 +113,8 @@ int Player::tallyScore() {
 
 bool Player::isAlive() {
     if(timeLeft > 0 && intelligence > 0 && money > 0)
-        return false;
-    return true;
+        return true;
+    return false;
 }
 bool Player::hasWon() {
     if(stepsRemaining <= 0)

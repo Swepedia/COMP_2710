@@ -50,23 +50,23 @@ int getPuzzle() {
 bool puzzleCheck(string answer, int num) {
     switch(num) {
         case 0:
-            if(p0.compare(answer) == 0) 
+            if(a0.compare(answer) == 0) 
                 return true;
             break;
         case 1:
-            if(p1.compare(answer) == 0)
+            if(a1.compare(answer) == 0)
                 return true;
             break;
         case 2:
-            if(p2.compare(answer) == 0)
+            if(a2.compare(answer) == 0)
                 return true;
             break;
         case 3:
-            if(p3.compare(answer) == 0)
+            if(a3.compare(answer) == 0)
                 return true;
             break;
         case 4:
-            if(p4.compare(answer) == 0)
+            if(a4.compare(answer) == 0)
                 return true;
             break;
         default:
