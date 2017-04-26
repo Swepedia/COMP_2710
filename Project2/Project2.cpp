@@ -12,6 +12,7 @@
 #include<string>
 #include<vector>
 #include<cstdlib>
+#include<climits>
 using namespace std;
 
 struct User {
@@ -52,6 +53,8 @@ int main() {
     if(answer == 1) {
         string username;
         string password;
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
         cout << "Username: ";
         getline(cin, username);
         cout << "Password: ";
