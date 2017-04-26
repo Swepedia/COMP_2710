@@ -26,7 +26,7 @@ struct Client {
     double income;
 };
 
-int login();
+//int login();
 /*
  * displays the login text
  * returns the option chosen:
@@ -35,23 +35,38 @@ int login();
  */
 
 int main() {
-    if(login() == 1) {
-    } else {
-        return 0;
-    }
-    return 0;
-}
-
-int login() {
     cout << "================================================================\n";
     cout << "|         Welcome to the Auburn branch of Tiger bank!          |\n";
     cout << "================================================================\n";
     cout << "1) Login\n";
     cout << "2) Quit\n";
     cout << "Please choose an option: ";
-    int answer;
-    do {
+    int answer = 0;
+    cin >> answer;
+    while(answer > 2 && answer < 1) {
+        cout << "Input a valid value: "
         cin >> answer;
-    } while(answer / 2);
+    }
+    if(answer == 1) {
+    } else {
+        return 0;
+    }
+    return 0;
+}
+
+/*int login() {
+    cout << "================================================================\n";
+    cout << "|         Welcome to the Auburn branch of Tiger bank!          |\n";
+    cout << "================================================================\n";
+    cout << "1) Login\n";
+    cout << "2) Quit\n";
+    cout << "Please choose an option: ";
+    int answer = 0;
+    cin >> answer;
+    while(answer > 2 && answer < 1) {
+        cout << "Input a valid value: "
+        cin >> answer;
+    }
     return answer;
 }
+*/
