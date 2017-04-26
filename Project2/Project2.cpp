@@ -10,6 +10,8 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<vector>
+#include<cstdlib>
 using namespace std;
 
 struct User {
@@ -48,6 +50,23 @@ int main() {
         cin >> answer;
     }
     if(answer == 1) {
+        string username;
+        string password;
+        cout << "Username: ";
+        cin >> username;
+        cout << "Password: ";
+        cin >> password;
+        ifstream input("login");
+        if(input.fail()) {
+            cout << "Login info file not found\n";
+            exit(1);
+        }
+        string next;
+        vector<string> login;
+        while(input >> next) {
+            login.push_back(next);
+        }
+        input.close();
     } else {
         return 0;
     }
