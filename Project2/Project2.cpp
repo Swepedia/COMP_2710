@@ -55,7 +55,6 @@ int main() {
     cout << "================================================================\n";
     cout << "1) Login\n";
     cout << "2) Quit\n";
-    cout << "Please choose an option: ";
     /*int answer = 0;
     cin >> answer;
     while(answer > 2 && answer < 1) {
@@ -130,10 +129,11 @@ int main() {
 */
 
 int menuDecider(int upper) {
+    cout << "Please choose an option: ";
     int answer = 0;
     cin >> answer;
-    while(answer > upper && answer < 1) {
-        cout << "Input a valid value: ";
+    while(answer > upper || answer < 1) {
+        cout << "Input a valid option: ";
         cin >> answer;
     }
     cin.clear();
