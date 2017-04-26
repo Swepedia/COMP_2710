@@ -44,7 +44,7 @@ int main() {
     int answer = 0;
     cin >> answer;
     while(answer > 2 && answer < 1) {
-        cout << "Input a valid value: "
+        cout << "Input a valid value: ";
         cin >> answer;
     }
     if(answer == 1) {
