@@ -53,9 +53,9 @@ int main() {
         string username;
         string password;
         cout << "Username: ";
-        cin >> username;
+        getline(cin, username);
         cout << "Password: ";
-        cin >> password;
+        getline(cin, password);
         ifstream input("login");
         if(input.fail()) {
             cout << "Login info file not found\n";
