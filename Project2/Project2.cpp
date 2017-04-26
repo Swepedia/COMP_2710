@@ -51,14 +51,6 @@ int main() {
         cin >> answer;
     }
     if(answer == 1) {
-        string username;
-        string password;
-        cin.clear();
-        cin.ignore(INT_MAX, '\n');
-        cout << "Username: ";
-        getline(cin, username);
-        cout << "Password: ";
-        getline(cin, password);
         ifstream input("login");
         if(input.fail()) {
             cout << "Login info file not found\n";
@@ -70,6 +62,29 @@ int main() {
             login.push_back(next);
         }
         input.close();
+        string username;
+        string password;
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
+        bool loginSuccess = false;
+        do {
+            cout << "Username: ";
+            getline(cin, username);
+            cout << "Password: ";
+            getline(cin, password);
+            for(int i = 0; i < login.size(); i += 2) {
+                if(login[i] == username && login[i + 1] == password) {
+                    loginSuccess = true;
+                    break;
+                }
+            }
+            if(!loginSuccess) {
+                cout << "The user name or password is incorrect. Try again.\n";
+            }
+        }
+        while(!loginSuccess);
+        cout << "Success!\n";
+
     } else {
         return 0;
     }
