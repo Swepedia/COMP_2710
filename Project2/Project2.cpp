@@ -36,7 +36,7 @@ public:
     int userID;
     vector<User>* login;
     ScreenNormal(int userID, vector<User>* login);
-    void accountManagement();
+    bool accountManagement();
     void changePassword();
 };
 
@@ -168,10 +168,28 @@ void screenNormal() {
 
 //ScreenNormal
 
-ScreenNormal::ScreenNormal(int userID, vector<User>* login) : userID(userID), login(login)
-{}
+ScreenNormal::ScreenNormal(int userID, vector<User>* login) : userID(userID), login(login) {}
 
-void ScreenNormal::accountManagement() {
+bool ScreenNormal::accountManagement() {
+    cout << "======================================================================\n";
+    cout << "|      Teller Terminal System -- Client and Account Managament       |\n";
+    cout << "======================================================================\n";
+    cout << "1) Add a Client\n";
+    cout << "2) Add an Account\n";
+    cout << "3) Edit Client Information\n";
+    cout << "4) Manage an Account\n";
+    cout << "5) Save Client and Account Information\n";
+    cout << "6) Exit\n";
+
+    bool exit = false;
+    int answer = menuDecider(6);
+
+    switch (answer) {
+        case 1:
+            cout << "A new Client will be added:\n";
+    }
+
+    return exit;
 }
 
 void ScreenNormal::changePassword() {
@@ -180,8 +198,7 @@ void ScreenNormal::changePassword() {
 
 //ScreenAdmin
 
-ScreenAdmin::ScreenAdmin(int userID, vector<User>* login) : ScreenNormal(userID, login) {
-}
+ScreenAdmin::ScreenAdmin(int userID, vector<User>* login) : ScreenNormal(userID, login) {}
 
 void ScreenAdmin::staffAdd() {
 }
