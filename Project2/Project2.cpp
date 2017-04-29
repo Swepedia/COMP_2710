@@ -42,14 +42,16 @@ class ScreenNormal {
 public:
     int userID;
     vector<User>* login;
-    ScreenNormal(int userID, vector<User>* login);
+    vector<Client>* clients;
+    vector<Account>* accounts;
+    ScreenNormal(int userID, vector<User>* login, vector<Client>* clients, vector<Account>* accounts);
     bool accountManagement();
     void changePassword();
 };
 
 class ScreenAdmin : public ScreenNormal {
 public:
-    ScreenAdmin(int userID, vector<User>* login);
+    ScreenAdmin(int userID, vector<User>* login, vector<Client>* clients, vector<Account>* accounts);
     void staffAdd();
     void staffDelete();
     void staffDisplay();
@@ -206,7 +208,8 @@ void screenNormal() {
 
 //ScreenNormal
 
-ScreenNormal::ScreenNormal(int userID, vector<User>* login) : userID(userID), login(login) {}
+ScreenNormal::ScreenNormal(int userID, vector<User>* login, vector<Client>* clients, vector<Account>* accounts)
+    : userID(userID), login(login), clients(clients), accounts(accounts) {}
 
 bool ScreenNormal::accountManagement() {
     cout << "======================================================================\n";
@@ -236,7 +239,8 @@ void ScreenNormal::changePassword() {
 
 //ScreenAdmin
 
-ScreenAdmin::ScreenAdmin(int userID, vector<User>* login) : ScreenNormal(userID, login) {}
+ScreenAdmin::ScreenAdmin(int userID, vector<User>* login, vector<Client>* clients, vector<Account>* accounts)
+    : ScreenNormal(userID, login, clients, accounts) {}
 
 void ScreenAdmin::staffAdd() {
 }
