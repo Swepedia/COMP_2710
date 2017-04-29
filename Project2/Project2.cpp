@@ -206,47 +206,65 @@ void screenNormal() {
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//ScreenNormal
+    //ScreenNormal
 
-ScreenNormal::ScreenNormal(int userID, vector<User>* login, vector<Client>* clients, vector<Account>* accounts)
-    : userID(userID), login(login), clients(clients), accounts(accounts) {}
+        ScreenNormal::ScreenNormal(int userID, vector<User>* login, vector<Client>* clients,
+                vector<Account>* accounts)
+            : userID(userID), login(login), clients(clients), accounts(accounts) {}
 
-bool ScreenNormal::accountManagement() {
-    cout << "======================================================================\n";
-    cout << "|      Teller Terminal System -- Client and Account Managament       |\n";
-    cout << "======================================================================\n";
-    cout << "1) Add a Client\n";
-    cout << "2) Add an Account\n";
-    cout << "3) Edit Client Information\n";
-    cout << "4) Manage an Account\n";
-    cout << "5) Save Client and Account Information\n";
-    cout << "6) Exit\n";
+        bool ScreenNormal::accountManagement() {
+            cout << "======================================================================\n";
+            cout << "|      Teller Terminal System -- Client and Account Managament       |\n";
+            cout << "======================================================================\n";
+            cout << "1) Add a Client\n";
+            cout << "2) Add an Account\n";
+            cout << "3) Edit Client Information\n";
+            cout << "4) Manage an Account\n";
+            cout << "5) Save Client and Account Information\n";
+            cout << "6) Exit\n";
 
-    bool exit = false;
-    int answer = menuDecider(6);
+            bool exit = false;
+            int answer = menuDecider(6);
 
-    switch (answer) {
-        case 1:
-            cout << "A new Client will be added:\n";
-    }
+            switch (answer) {
+                case 1:
+                    Client tempClient;
+                    string temp;
+                    cout << "A new Client will be added:\n";
+                    cout << "Client name: ";
+                    getline(cin, tempClient.name);
+                    cout << "Address: ";
+                    getline(cin, tempClient.address);
+                    cout << "Social security number: ";
+                    getline(cin, tempClient.ssn);
+                    cout << "Employer: ";
+                    getline(cin, tempClient.employer);
+                    cout << "Annual income: ";
+                    getline(cin, temp);
+                    tempClient.income = stoi(temp);
+                    clients->push_back(tempClient);
+                    cout << "A new client was added!";
+                    getchar();
+            }
 
-    return exit;
-}
+            return exit;
+        }
 
-void ScreenNormal::changePassword() {
-}
+        void ScreenNormal::changePassword() {
+        }
 
 
-//ScreenAdmin
+    //ScreenAdmin
 
-ScreenAdmin::ScreenAdmin(int userID, vector<User>* login, vector<Client>* clients, vector<Account>* accounts)
-    : ScreenNormal(userID, login, clients, accounts) {}
+        ScreenAdmin::ScreenAdmin(int userID, vector<User>* login, vector<Client>* clients,
+                vector<Account>* accounts)
+            : ScreenNormal(userID, login, clients, accounts) {}
 
-void ScreenAdmin::staffAdd() {
-}
+        void ScreenAdmin::staffAdd() {
+        }
 
-void ScreenAdmin::staffDelete() {
-}
+        void ScreenAdmin::staffDelete() {
+        }
 
-void ScreenAdmin::staffDisplay() {
-}
+        void ScreenAdmin::staffDisplay() {
+        }
