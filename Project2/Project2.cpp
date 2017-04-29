@@ -31,6 +31,12 @@ struct Client {
     double income;
 };
 
+struct Account {
+    int accountNumber;
+    string accountType;
+    int balance;
+};
+
 class ScreenNormal {
 public:
     int userID;
