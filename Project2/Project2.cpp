@@ -26,9 +26,9 @@ struct User {
 struct Client {
     string name;
     string address;
-    int ssn;
+    string ssn;
     string employer;
-    double income;
+    int income;
 };
 
 struct Account {
@@ -97,6 +97,20 @@ int main() {
             login.push_back(tempUser);
         }
         input.close();
+        input.open("clients");
+        if(input.fail()) {
+            cout << "Client info file not fount\n";
+            exit(1);
+        }
+        vector<Client> clients;
+        Client tempClient;
+        while(input >> tempClient.name) {
+            input >> tempClient.address;
+            input >> tempClient.ssn;
+            input >> tempClient.employer;
+            input >> next;
+            tempClient.income = stoi(next);
+        }
         string username;
         string password;
         bool loginSuccess = false;
