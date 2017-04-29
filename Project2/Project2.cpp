@@ -32,6 +32,7 @@ struct Client {
 };
 
 struct Account {
+    string name;
     int accountNumber;
     string accountType;
     int balance;
@@ -99,7 +100,7 @@ int main() {
         input.close();
         input.open("clients");
         if(input.fail()) {
-            cout << "Client info file not fount\n";
+            cout << "Client info file not found\n";
             exit(1);
         }
         vector<Client> clients;
@@ -110,6 +111,23 @@ int main() {
             input >> tempClient.employer;
             input >> next;
             tempClient.income = stoi(next);
+            clients.push_back(tempClient);
+        }
+        input.close();
+        input.open("accounts");
+        if(input.fail()) {
+            cout << "Account info file not found\n";
+            exit(1);
+        }
+        vector<Account> accounts;
+        Account tempAccount;
+        while(input >> tempAccount.name) {
+            input >> next;
+            tempAccount.accountNumber = stoi(next);
+            input >> tempAccount.accountType;
+            input >> next;
+            tempAccount.balance = stoi(next);
+            accounts.push_back(tempAccount);
         }
         string username;
         string password;
