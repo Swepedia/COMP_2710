@@ -33,14 +33,16 @@ struct Client {
 
 class ScreenNormal {
 public:
-    ScreenNormal(int userID, vector<string>* login);
+    int userID;
+    vector<User>* login;
+    ScreenNormal(int userID, vector<User>* login);
     void accountManagement();
     void changePassword();
 };
 
 class ScreenAdmin : public ScreenNormal {
 public:
-    ScreenAdmin(int userID, vector<string>* login);
+    ScreenAdmin(int userID, vector<User>* login);
     void staffAdd();
     void staffDelete();
     void staffDisplay();
@@ -157,4 +159,35 @@ void screenNormal() {
     cout << "2) Change password\n";
     cout << "3) Exit\n";
     int answer = menuDecider(3);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                      Classes                                           //
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//ScreenNormal
+
+ScreenNormal::ScreenNormal(int userID, vector<User>* login) : userID(userID), login(login)
+{}
+
+void ScreenNormal::accountManagement() {
+}
+
+void ScreenNormal::changePassword() {
+}
+
+
+//ScreenAdmin
+
+ScreenAdmin::ScreenAdmin(int userID, vector<User>* login) : ScreenNormal(userID, login) {
+}
+
+void ScreenAdmin::staffAdd() {
+}
+
+void ScreenAdmin::staffDelete() {
+}
+
+void ScreenAdmin::staffDisplay() {
 }
