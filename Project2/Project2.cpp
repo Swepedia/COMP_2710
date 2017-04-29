@@ -6,6 +6,8 @@
 //  g++ -o Project2 Project2.cpp
 //
 //Resources:
+//  Absolute C++ 6th ed.
+//  code posted in specifications on how to mask the passwords with '*'
 
 #include<iostream>
 #include<fstream>
@@ -27,6 +29,21 @@ struct Client {
     int ssn;
     string employer;
     double income;
+};
+
+class ScreenNormal {
+public:
+    ScreenNormal(int userID, vector<string>* login);
+    void accountManagement();
+    void changePassword();
+};
+
+class ScreenAdmin : public ScreenNormal {
+public:
+    ScreenAdmin(int userID, vector<string>* login);
+    void staffAdd();
+    void staffDelete();
+    void staffDisplay();
 };
 
 //int login();
@@ -55,13 +72,6 @@ int main() {
     cout << "================================================================\n";
     cout << "1) Login\n";
     cout << "2) Quit\n";
-    /*int answer = 0;
-    cin >> answer;
-    while(answer > 2 && answer < 1) {
-        cout << "Input a valid value: ";
-        cin >> answer;
-    }
-    */
     int answer;
     answer = menuDecider(2);
     if(answer == 1) {
@@ -78,8 +88,6 @@ int main() {
         input.close();
         string username;
         string password;
-        //cin.clear();
-        //cin.ignore(INT_MAX, '\n');
         bool loginSuccess = false;
         int user = 0;
         do {
@@ -111,22 +119,6 @@ int main() {
     return 0;
 }
 
-/*int login() {
-    cout << "================================================================\n";
-    cout << "|         Welcome to the Auburn branch of Tiger bank!          |\n";
-    cout << "================================================================\n";
-    cout << "1) Login\n";
-    cout << "2) Quit\n";
-    cout << "Please choose an option: ";
-    int answer = 0;
-    cin >> answer;
-    while(answer > 2 && answer < 1) {
-        cout << "Input a valid value: "
-        cin >> answer;
-    }
-    return answer;
-}
-*/
 
 int menuDecider(int upper) {
     cout << "Please choose an option: ";
