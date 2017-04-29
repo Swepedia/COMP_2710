@@ -20,7 +20,7 @@ using namespace std;
 struct User {
     string username;
     string password;
-    int role;
+    string role;
 };
 
 struct Client {
@@ -81,9 +81,12 @@ int main() {
             exit(1);
         }
         string next;
-        vector<string> login;
-        while(input >> next) {
-            login.push_back(next);
+        vector<User> login;
+        User tempUser;
+        while(input >> tempUser.username) {
+            input >> tempUser.password;
+            input >> tempUser.role;
+            login.push_back(tempUser);
         }
         input.close();
         string username;
@@ -95,8 +98,8 @@ int main() {
             getline(cin, username);
             cout << "Password: ";
             getline(cin, password);
-            for(int i = 0; i < login.size(); i += 3) {
-                if(login[i] == username && login[i + 1] == password) {
+            for(int i = 0; i < login.size(); i++) {
+                if(login[i].username == username && login[i + 1].password == password) {
                     loginSuccess = true;
                     user = i;
                     break;
@@ -108,7 +111,7 @@ int main() {
         }
         while(!loginSuccess);
 
-        if(stoi(login[user + 2]) == 1) {
+        if(stoi(login[user + 2].role) == 1) {
             screenAdmin();
         } else {
             screenNormal();
