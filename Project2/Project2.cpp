@@ -228,23 +228,59 @@ void screenNormal() {
 
             switch (answer) {
                 case 1:
-                    Client tempClient;
-                    string temp;
-                    cout << "A new Client will be added:\n";
-                    cout << "Client name: ";
-                    getline(cin, tempClient.name);
-                    cout << "Address: ";
-                    getline(cin, tempClient.address);
-                    cout << "Social security number: ";
-                    getline(cin, tempClient.ssn);
-                    cout << "Employer: ";
-                    getline(cin, tempClient.employer);
-                    cout << "Annual income: ";
-                    getline(cin, temp);
-                    tempClient.income = stoi(temp);
-                    clients->push_back(tempClient);
-                    cout << "A new client was added!";
-                    getchar();
+                    {
+                        Client tempClient;
+                        string temp;
+                        cout << "A new Client will be added:\n";
+                        cout << "Client name: ";
+                        getline(cin, tempClient.name);
+                        cout << "Address: ";
+                        getline(cin, tempClient.address);
+                        cout << "Social security number: ";
+                        getline(cin, tempClient.ssn);
+                        cout << "Employer: ";
+                        getline(cin, tempClient.employer);
+                        cout << "Annual income: ";
+                        getline(cin, temp);
+                        tempClient.income = stoi(temp);
+                        clients->push_back(tempClient);
+                        cout << "A new client was added!\n";
+                        cout << "Press any key to continue...";
+                        getchar();
+                        break;
+                    }
+                case 2:
+                    {
+                        Account tempAccount;
+                        string temp;
+                        bool success = false;
+                        do {
+                            cout << "Choose a client: ";
+                            getline(cin, temp);
+                            for(int i = 0; i < clients->size(); i++) {
+                                if(clients->at(i).name == temp)
+                                    success = true;
+                            }
+                            if(!success)
+                                cout << "Error - client not in the system!\n";
+                        } while(!success);
+
+                        tempAccount.name = temp;
+                        cout << "A new account will be created for " << temp << "...\n";
+                        cout << "Account number: ";
+                        getline(cin, temp);
+                        tempAccount.accountNumber = stoi(temp);
+                        cout << "Account type: ";
+                        getline(cin, tempAccount.accountType);
+                        cout << "Balance: ";
+                        getline(cin, temp);
+                        tempAccount.balance = stoi(temp);
+                        accounts->push_back(tempAccount);
+                        cout << "A new account was created for " << tempAccount.name << "!\n";
+                        cout << "Press any key to continue...";
+                        getchar();
+                        break;
+                    }
             }
 
             return exit;
