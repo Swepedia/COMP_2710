@@ -393,6 +393,32 @@ StrPtr checkForClient(vector<Client> clients) {
                             }
                         } while(success);
                     }
+                case 5:
+                    {
+                        ofstream outputClients("clients");
+                        ofstream outputAccounts("accounts");
+                        if(outputClients.fail()) {
+                            cout << "Failed to save client information";
+                        }
+                        if(outputAccounts.fail()) {
+                            cout << "Failed to save Account information";
+                        }
+                        for(int i = 0; i < clients -> size(); i++) {
+                            outputClients << clients -> at(i).name << endl
+                                << clients -> at(i).address << endl
+                                << clients -> at(i).ssn << endl
+                                << clients -> at(i).employer << endl
+                                << clients -> at(i).income << endl;
+                        }
+                        for(int i = 0; i < accounts -> size(); i++) {
+                            outputAccounts << accounts -> at(i).name << endl
+                                << accounts -> at(i).accountNumber << endl
+                                << accounts -> at(i).accountType << endl
+                                << accounts -> at(i).balance << endl;
+                        }
+                    }
+                case 6:
+                    return true;
             }
 
             return exit;
