@@ -79,7 +79,7 @@ void screenNormal();
 /*
  * provides funcitonality for the non-admin screen
  */
-StrPtr checkForClient(vector<Client> clients);
+vector<string> checkForClient(vector<Client> clients);
 /*
  * checks if the client exists and returns the client's name
  */
@@ -270,10 +270,10 @@ void screenNormal() {
     cout << "3) Exit\n";
 }
 
-StrPtr checkForClient(vector<Client> clients) {
+vector<string> checkForClient(vector<Client> clients) {
     string temp;
     bool success = false;
-    string output[2];
+    vector<string> output;
     do {
         cout << "Choose a client: ";
         getline(cin, temp);
@@ -282,15 +282,16 @@ StrPtr checkForClient(vector<Client> clients) {
                 success = true;
                 ostringstream stream;
                 stream << i;
-                output[1] = stream.str();
+                output.push_back(stream.str());
             }
         }
         if(!success)
             cout << "Error - client not in the system!\n";
     } while(!success);
+    string swap = output[0];
     output[0] = temp;
-    StrPtr o = output;
-    return o;
+    output.push_back(swap);
+    return output;
 }
 
 void saveUsers(vector<User> login) {
@@ -422,7 +423,7 @@ void saveAccounts(vector<Account> accounts) {
                     }
                 case 3:
                     {
-                        string* temp = checkForClient(*clients);
+                        vector<string> temp = checkForClient(*clients);
                         int loc = stoi(temp[1]);
                         cout << "Display " << temp[0] << "'s information:\n";
                         cout << "Address: " << clients -> at(loc).address << endl;
@@ -446,8 +447,9 @@ void saveAccounts(vector<Account> accounts) {
                             getline(cin, intConverter);
                             tempClient.income = stoi(intConverter);
                             clients -> erase(clients -> begin() + loc);
+                            tempClient.name = temp[0];
                             clients -> push_back(tempClient);
-                            cout << "Client " << temp[0] << "'s information was updated!";
+                            cout << "Client " << temp[0] << "'s information was updated!\n";
                             cout << "Press any key to continue...";
                             getchar();
                         } else {
@@ -644,7 +646,7 @@ void saveAccounts(vector<Account> accounts) {
         }
 
         void ScreenAdmin::staffDisplay() {
-            cout << "There are " << login -> size() << " users in the system./n";
+            cout << "There are " << login -> size() << " users in the system.\n";
             for(int i = 0; i < login -> size(); i++) {
                 cout << i + 1 << ". User name: " << login -> at(i).username << "\tRole: ";
                 if(login -> at(i).role == 0) {
