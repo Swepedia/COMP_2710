@@ -101,10 +101,11 @@ int main() {
         string next;
         vector<User> login;
         User tempUser;
+        cout << "Opening login\n";
         while(input >> tempUser.username) {
             input >> tempUser.password;
             input >> next;
-            tempUser.role = stoi(next);
+            tempUser.role = stoi(next, nullptr);
             login.push_back(tempUser);
         }
         input.close();
@@ -115,12 +116,13 @@ int main() {
         }
         vector<Client> clients;
         Client tempClient;
+        cout << "Opening Clients\n";
         while(input >> tempClient.name) {
             input >> tempClient.address;
             input >> tempClient.ssn;
             input >> tempClient.employer;
             input >> next;
-            tempClient.income = stoi(next);
+            tempClient.income = stoi(next, nullptr);
             clients.push_back(tempClient);
         }
         input.close();
@@ -131,12 +133,13 @@ int main() {
         }
         vector<Account> accounts;
         Account tempAccount;
+        cout << "Opening accounts\n";
         while(input >> tempAccount.name) {
             input >> next;
-            tempAccount.accountNumber = stoi(next);
+            tempAccount.accountNumber = stoi(next, nullptr);
             input >> tempAccount.accountType;
             input >> next;
-            tempAccount.balance = stoi(next);
+            tempAccount.balance = stoi(next, nullptr);
             accounts.push_back(tempAccount);
         }
         string username;
@@ -193,7 +196,27 @@ int main() {
                 }
             }
         } else {
-            screenNormal();
+            bool run = true;
+            ScreenNormal currentUser(user, &login, &clients, &accounts);
+            while(run) {
+                screenNormal();
+                int answer = menuDecider(3);
+                switch(answer) {
+                    case 1:
+                    {
+                        bool exit = false;
+                        while(!exit) {
+                            exit = currentUser.accountManagement();
+                        }
+                        break;
+                    }
+                    case 2:
+                        currentUser.changePassword();
+                        break;
+                    case 3:
+                        run = false;
+                }
+            }
         }
     } else {
         return 0;
