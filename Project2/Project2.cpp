@@ -83,6 +83,18 @@ StrPtr checkForClient(vector<Client> clients);
 /*
  * checks if the client exists and returns the client's name
  */
+void saveAccounts(vector<Account> accounts);
+/*
+ * saves the accounts vector to file
+ */
+void saveClients(vector<Client> clients);
+/*
+ * saves the clients vector to file
+ */
+void saveUsers(vector<User> login);
+/*
+ * saves the users vector to file
+ */
 
 
 int main() {
@@ -280,6 +292,50 @@ StrPtr checkForClient(vector<Client> clients) {
     return o;
 }
 
+void saveUsers(vector<User> login) {
+    ofstream outputUsers("login");
+    if(outputUsers.fail()) {
+        cout << "Failed to save User information";
+        exit(1);
+    }
+    for(int i = 0; i < login.size(); i++) {
+        outputUsers << login.at(i).username << endl
+            << login.at(i).password << endl
+            << login.at(i).role << endl;
+    }
+}
+
+void saveClients(vector<Client> clients) {
+    ofstream outputClients("clients");
+    if(outputClients.fail()) {
+        cout << "Failed to save client information";
+        exit(1);
+    }
+    for(int i = 0; i < clients.size(); i++) {
+        outputClients << clients.at(i).name << endl
+            << clients.at(i).address << endl
+            << clients.at(i).ssn << endl
+            << clients.at(i).employer << endl
+            << clients.at(i).income << endl;
+    }
+    outputClients.close();
+}
+
+void saveAccounts(vector<Account> accounts) {
+    ofstream outputAccounts("accounts");
+    if(outputAccounts.fail()) {
+        cout << "Failed to save client information";
+        exit(1);
+    }
+    for(int i = 0; i < accounts.size(); i++) {
+        outputAccounts << accounts.at(i).name << endl
+            << accounts.at(i).accountNumber << endl
+            << accounts.at(i).accountType << endl
+            << accounts.at(i).balance << endl;
+    }
+    outputAccounts.close();
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 //                                      Classes                                           //
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -448,7 +504,7 @@ StrPtr checkForClient(vector<Client> clients) {
                     }
                 case 5:
                     {
-                        ofstream outputClients("clients");
+                        /*ofstream outputClients("clients");
                         ofstream outputAccounts("accounts");
                         if(outputClients.fail()) {
                             cout << "Failed to save client information";
@@ -469,6 +525,9 @@ StrPtr checkForClient(vector<Client> clients) {
                                 << accounts -> at(i).accountType << endl
                                 << accounts -> at(i).balance << endl;
                         }
+                        */
+                        saveClients(*clients);
+                        saveAccounts(*accounts);
                         cout << "Client and account information saved!\n";
                         cout << "Press any key to continue...";
                         getchar();
