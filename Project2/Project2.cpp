@@ -228,6 +228,7 @@ int main() {
                 }
             }
         }
+        saveUsers(login);
     } else {
         return 0;
     }
