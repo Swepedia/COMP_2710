@@ -347,6 +347,52 @@ StrPtr checkForClient(vector<Client> clients) {
                         }
                         break;
                     }
+                case 4:
+                    {
+                        string temp;
+                        int loc;
+                        int target;
+                        bool success = false;
+                        do {
+                            cout << "Which account will be managed? ";
+                            getline(cin, temp);
+                            target = stoi(temp);
+                            for(int i = 0; i < accounts -> size(); i++) {
+                                if(target == accounts -> at(i).accountNumber) {
+                                    success = true;
+                                    loc = i;
+                                }
+                            }
+                            if(!success) {
+                                cout << "Error -- Account " << temp << " is not in the System!\n";
+                            }
+                        } while(!success);
+                        cout << "Manage account " << temp << " for " << accounts -> at(loc).name << endl;
+                        do {
+                            cout << "1) Deposit\n";
+                            cout << "2) Withdrawal\n";
+                            cout << "3) Cancel\n";
+                            int answer = menuDecider(3);
+                            switch(answer) {
+                                case 1:
+                                    {
+                                        cout << "Deposit amount: ";
+                                        getline(cin, temp);
+                                        accounts -> at(loc).balance += stoi(temp);
+                                        break;
+                                    }
+                                case 2:
+                                    {
+                                        cout << "Withdrawal amount: ";
+                                        getline(cin, temp);
+                                        accounts -> at(loc).balance -= stoi(temp);
+                                        break;
+                                    }
+                                case 3:
+                                    success = false;
+                            }
+                        } while(success);
+                    }
             }
 
             return exit;
