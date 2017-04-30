@@ -526,4 +526,15 @@ StrPtr checkForClient(vector<Client> clients) {
         }
 
         void ScreenAdmin::staffDisplay() {
+            cout << "There are " << login -> size() << " users in the system.";
+            for(int i = 0; i < login -> size(); i++) {
+                cout << i << ". User name: " << login -> at(i).username << "\tRole: ";
+                if(login -> at(i).role == 0) {
+                    cout << "Branch Staff\n";
+                } else {
+                    cout << "System Administrator\n";
+                }
+            }
+            cout << "Press any key to continue...\n";
+            getchar();
         }
