@@ -17,6 +17,8 @@
 #include<climits>
 using namespace std;
 
+typedef string* StrPtr;
+
 struct User {
     string username;
     string password;
@@ -76,10 +78,11 @@ void screenNormal();
 /*
  * provides funcitonality for the non-admin screen
  */
-string checkForClient(vector<Client> clients);
+StrPtr checkForClient(vector<Client> clients);
 /*
  * checks if the client exists and returns the client's name
  */
+
 
 int main() {
     cout << "================================================================\n";
@@ -205,20 +208,25 @@ void screenNormal() {
     int answer = menuDecider(3);
 }
 
-string checkForClient(vector<Client> clients) {
+StrPtr checkForClient(vector<Client> clients) {
     string temp;
     bool success = false;
+    string output[2];
     do {
         cout << "Choose a client: ";
         getline(cin, temp);
         for(int i = 0; i < clients.size(); i++) {
-            if(clients.at(i).name == temp)
+            if(clients.at(i).name == temp) {
                 success = true;
+                output[1] = "" + i;
+            }
         }
         if(!success)
             cout << "Error - client not in the system!\n";
     } while(!success);
-    return temp;
+    output[0] = temp;
+    StrPtr o = output;
+    return o;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -263,7 +271,7 @@ string checkForClient(vector<Client> clients) {
                         cout << "Annual income: ";
                         getline(cin, temp);
                         tempClient.income = stoi(temp);
-                        clients->push_back(tempClient);
+                        clients -> push_back(tempClient);
                         cout << "A new client was added!\n";
                         cout << "Press any key to continue...";
                         getchar();
@@ -286,7 +294,7 @@ string checkForClient(vector<Client> clients) {
                         } while(!success);
                         */
 
-                        temp = checkForClient(*clients);
+                        temp = (checkForClient(*clients))[0];
 
                         tempAccount.name = temp;
                         cout << "A new account will be created for " << temp << "...\n";
@@ -298,7 +306,7 @@ string checkForClient(vector<Client> clients) {
                         cout << "Balance: ";
                         getline(cin, temp);
                         tempAccount.balance = stoi(temp);
-                        accounts->push_back(tempAccount);
+                        accounts -> push_back(tempAccount);
                         cout << "A new account was created for " << tempAccount.name << "!\n";
                         cout << "Press any key to continue...";
                         getchar();
@@ -306,6 +314,38 @@ string checkForClient(vector<Client> clients) {
                     }
                 case 3:
                     {
+                        string* temp = checkForClient(*clients);
+                        int loc = stoi(temp[1]);
+                        cout << "Display " << temp[0] << "'s information:\n";
+                        cout << "Address: " << clients -> at(loc).address << endl;
+                        cout << "Social security number: " << clients -> at(loc).ssn << endl;
+                        cout << "Employer: " << clients -> at(loc).employer << endl;
+                        cout << "Annual income: " << clients -> at(loc).income << endl;
+                        cout << "Client " << temp[0] << "'s information will be updated ...\n";
+                        cout << "1) Confirm\n";
+                        cout << "2) Cancel\n";
+                        int answer = menuDecider(2);
+                        if(answer == 1) {
+                            Client tempClient;
+                            string intConverter;
+                            cout << "Address: ";
+                            getline(cin, tempClient.address);
+                            cout << "Social security number: ";
+                            getline(cin, tempClient.ssn);
+                            cout << "Employer: ";
+                            getline(cin, tempClient.employer);
+                            cout << "Annual income: ";
+                            getline(cin, intConverter);
+                            tempClient.income = stoi(intConverter);
+                            clients -> erase(clients -> begin() + loc);
+                            clients -> push_back(tempClient);
+                            cout << "Client " << temp[0] << "'s information was updated!";
+                            cout << "Press any key to continue...";
+                            getchar();
+                        } else {
+                            return true;
+                        }
+                        break;
                     }
             }
 
