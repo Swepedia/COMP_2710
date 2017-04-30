@@ -76,6 +76,10 @@ void screenNormal();
 /*
  * provides funcitonality for the non-admin screen
  */
+string checkForClient(vector<Client> clients);
+/*
+ * checks if the client exists and returns the client's name
+ */
 
 int main() {
     cout << "================================================================\n";
@@ -201,6 +205,22 @@ void screenNormal() {
     int answer = menuDecider(3);
 }
 
+string checkForClient(vector<Client> clients) {
+    string temp;
+    bool success = false;
+    do {
+        cout << "Choose a client: ";
+        getline(cin, temp);
+        for(int i = 0; i < clients.size(); i++) {
+            if(clients.at(i).name == temp)
+                success = true;
+        }
+        if(!success)
+            cout << "Error - client not in the system!\n";
+    } while(!success);
+    return temp;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 //                                      Classes                                           //
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -253,7 +273,7 @@ void screenNormal() {
                     {
                         Account tempAccount;
                         string temp;
-                        bool success = false;
+                        /*bool success = false;
                         do {
                             cout << "Choose a client: ";
                             getline(cin, temp);
@@ -264,6 +284,9 @@ void screenNormal() {
                             if(!success)
                                 cout << "Error - client not in the system!\n";
                         } while(!success);
+                        */
+
+                        temp = checkForClient(*clients);
 
                         tempAccount.name = temp;
                         cout << "A new account will be created for " << temp << "...\n";
@@ -280,6 +303,9 @@ void screenNormal() {
                         cout << "Press any key to continue...";
                         getchar();
                         break;
+                    }
+                case 3:
+                    {
                     }
             }
 
