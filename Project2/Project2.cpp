@@ -22,7 +22,7 @@ typedef string* StrPtr;
 struct User {
     string username;
     string password;
-    string role;
+    int role;
 };
 
 struct Client {
@@ -103,7 +103,8 @@ int main() {
         User tempUser;
         while(input >> tempUser.username) {
             input >> tempUser.password;
-            input >> tempUser.role;
+            input >> next;
+            tempUser.role = stoi(next);
             login.push_back(tempUser);
         }
         input.close();
@@ -160,7 +161,7 @@ int main() {
         }
         while(!loginSuccess);
 
-        if(stoi(login[user + 2].role) == 1) {
+        if(login[user].role == 1) {
             screenAdmin();
         } else {
             screenNormal();
@@ -432,6 +433,8 @@ StrPtr checkForClient(vector<Client> clients) {
                 getline(cin, temp);
                 if(login -> at(userID).password == temp) {
                     cout << "Your new password must be different!";
+                if(temp.size() == 0)
+                    cout << "Your new password can't be empty!";
                 } else {
                     login -> at(userID).password = temp;
                     success = true;
@@ -447,9 +450,79 @@ StrPtr checkForClient(vector<Client> clients) {
             : ScreenNormal(userID, login, clients, accounts) {}
 
         void ScreenAdmin::staffAdd() {
+            cout << "You will be adding a staff member to the system...\n";
+            string temp;
+            User tempUser;
+            bool success = false;
+            do {
+                cout << "User name: ";
+                getline(cin, temp);
+                if(temp.size() != 0) {
+                    success = true;
+                } else {
+                    cout << "The user name can't be empty!";
+                }
+            } while(!success);
+            tempUser.username = temp;
+            success = false;
+            do {
+                cout << "Password: ";
+                getline(cin, temp);
+                if(temp.size() != 0) {
+                    success = true;
+                } else {
+                    cout << "The password can't be empty!";
+                }
+            } while(!success);
+            tempUser.password = temp;
+            cout << "Choose role:\n";
+            cout << "1) Normal user\n";
+            cout << "2) Administrator\n";
+            int answer = menuDecider(2);
+            cout << "1) Confirm\n";
+            cout << "2) Cancel\n";
+            int confirm = menuDecider(2);
+            if(answer == 1) {
+                tempUser.role = 0;
+            } else {
+                tempUser.role = 1;
+            }
+            if(confirm == 1) {
+                cout << "A new branch staff member is added!\n";
+                login -> push_back(tempUser);
+                cout << "User name: " << tempUser.username;
+                if(tempUser.role == 0) {
+                    cout << "    Role: Normal User\n";
+                } else {
+                    cout << "    Role: System Administrator\n";
+                }
+            }
+            cout << "Press any key to continue...\n";
+            getchar();
         }
 
         void ScreenAdmin::staffDelete() {
+            string temp;
+            cout << "Delete a user - User name: ";
+            getline(cin, temp);
+            cout << "1) Confirm\n";
+            cout << "2) Cancel\n";
+            int answer = menuDecider(2);
+            bool success = false;
+            if(answer == 1) {
+                for(int i = 0; i < login -> size(); i++) {
+                    if(login -> at(i).username == temp) {
+                        cout << "User " << temp << " was deleted!\n";
+                        login -> erase(login -> begin() + i);
+                        success = true;
+                    }
+                }
+                if(!success) {
+                    cout << "Warning - User " << temp << " is not in the system. No user is deleted!\n";
+                }
+                cout << "Press any key to continue...\n";
+                getchar();
+            }
         }
 
         void ScreenAdmin::staffDisplay() {
