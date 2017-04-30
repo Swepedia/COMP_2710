@@ -162,7 +162,36 @@ int main() {
         while(!loginSuccess);
 
         if(login[user].role == 1) {
-            screenAdmin();
+            bool run = true;
+            ScreenAdmin currentUser(user, &login, &clients, &accounts);
+            while(run) {
+                screenAdmin();
+                int answer = menuDecider(6);
+                switch(answer) {
+                    case 1:
+                    {
+                        bool exit = false;
+                        while(!exit) {
+                            exit = currentUser.accountManagement();
+                        }
+                        break;
+                    }
+                    case 2:
+                        currentUser.staffAdd();
+                        break;
+                    case 3:
+                        currentUser.staffDelete();
+                        break;
+                    case 4:
+                        currentUser.staffDisplay();
+                        break;
+                    case 5:
+                        currentUser.changePassword();
+                        break;
+                    case 6:
+                        run = false;
+                }
+            }
         } else {
             screenNormal();
         }
@@ -196,7 +225,6 @@ void screenAdmin() {
     cout << "4) Display branch staff\n";
     cout << "5) Change password\n";
     cout << "6) Exit\n";
-    int answer = menuDecider(6);
 }
 
 void screenNormal() {
@@ -206,7 +234,6 @@ void screenNormal() {
     cout << "1) Client and Account Management\n";
     cout << "2) Change password\n";
     cout << "3) Exit\n";
-    int answer = menuDecider(3);
 }
 
 StrPtr checkForClient(vector<Client> clients) {
