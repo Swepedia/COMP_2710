@@ -15,6 +15,7 @@
 #include<vector>
 #include<cstdlib>
 #include<climits>
+#include<sstream>
 using namespace std;
 
 typedef string* StrPtr;
@@ -101,11 +102,10 @@ int main() {
         string next;
         vector<User> login;
         User tempUser;
-        cout << "Opening login\n";
         while(input >> tempUser.username) {
             input >> tempUser.password;
             input >> next;
-            tempUser.role = stoi(next, nullptr);
+            tempUser.role = stoi(next);
             login.push_back(tempUser);
         }
         input.close();
@@ -116,13 +116,12 @@ int main() {
         }
         vector<Client> clients;
         Client tempClient;
-        cout << "Opening Clients\n";
-        while(input >> tempClient.name) {
-            input >> tempClient.address;
-            input >> tempClient.ssn;
-            input >> tempClient.employer;
-            input >> next;
-            tempClient.income = stoi(next, nullptr);
+        while(getline(input, tempClient.name)) {
+            getline(input, tempClient.address);
+            getline(input, tempClient.ssn);
+            getline(input, tempClient.employer);
+            getline(input, next);
+            tempClient.income = stoi(next);
             clients.push_back(tempClient);
         }
         input.close();
@@ -133,13 +132,12 @@ int main() {
         }
         vector<Account> accounts;
         Account tempAccount;
-        cout << "Opening accounts\n";
-        while(input >> tempAccount.name) {
-            input >> next;
-            tempAccount.accountNumber = stoi(next, nullptr);
-            input >> tempAccount.accountType;
-            input >> next;
-            tempAccount.balance = stoi(next, nullptr);
+        while(getline(input, tempAccount.name)) {
+            getline(input, next);
+            tempAccount.accountNumber = stoi(next);
+            getline(input, tempAccount.accountType);
+            getline(input, next);
+            tempAccount.balance = stoi(next);
             accounts.push_back(tempAccount);
         }
         string username;
@@ -152,7 +150,7 @@ int main() {
             cout << "Password: ";
             getline(cin, password);
             for(int i = 0; i < login.size(); i++) {
-                if(login[i].username == username && login[i + 1].password == password) {
+                if(login[i].username == username && login[i].password == password) {
                     loginSuccess = true;
                     user = i;
                     break;
@@ -269,7 +267,9 @@ StrPtr checkForClient(vector<Client> clients) {
         for(int i = 0; i < clients.size(); i++) {
             if(clients.at(i).name == temp) {
                 success = true;
-                output[1] = "" + i;
+                ostringstream stream;
+                stream << i;
+                output[1] = stream.str();
             }
         }
         if(!success)
@@ -443,6 +443,8 @@ StrPtr checkForClient(vector<Client> clients) {
                                     success = false;
                             }
                         } while(success);
+                        cout << "Press any key to coninue...";
+                        getchar();
                     }
                 case 5:
                     {
@@ -467,6 +469,9 @@ StrPtr checkForClient(vector<Client> clients) {
                                 << accounts -> at(i).accountType << endl
                                 << accounts -> at(i).balance << endl;
                         }
+                        cout << "Client and account information saved!\n";
+                        cout << "Press any key to continue...";
+                        getchar();
                     }
                 case 6:
                     return true;
@@ -482,7 +487,7 @@ StrPtr checkForClient(vector<Client> clients) {
                 string temp;
                 getline(cin, temp);
                 if(login -> at(userID).password == temp) {
-                    cout << "Your new password must be different!";
+                    cout << "Your new password must be different!\n";
                 if(temp.size() == 0)
                     cout << "Your new password can't be empty!";
                 } else {
@@ -490,6 +495,9 @@ StrPtr checkForClient(vector<Client> clients) {
                     success = true;
                 }
             } while(!success);
+            cout << "Password changed!\n";
+            cout << "Press any key to continue...";
+            getchar();
         }
 
 
@@ -547,7 +555,7 @@ StrPtr checkForClient(vector<Client> clients) {
                     cout << "    Role: System Administrator\n";
                 }
             }
-            cout << "Press any key to continue...\n";
+            cout << "Press any key to continue...";
             getchar();
         }
 
@@ -570,21 +578,21 @@ StrPtr checkForClient(vector<Client> clients) {
                 if(!success) {
                     cout << "Warning - User " << temp << " is not in the system. No user is deleted!\n";
                 }
-                cout << "Press any key to continue...\n";
+                cout << "Press any key to continue...";
                 getchar();
             }
         }
 
         void ScreenAdmin::staffDisplay() {
-            cout << "There are " << login -> size() << " users in the system.";
+            cout << "There are " << login -> size() << " users in the system./n";
             for(int i = 0; i < login -> size(); i++) {
-                cout << i << ". User name: " << login -> at(i).username << "\tRole: ";
+                cout << i + 1 << ". User name: " << login -> at(i).username << "\tRole: ";
                 if(login -> at(i).role == 0) {
                     cout << "Branch Staff\n";
                 } else {
                     cout << "System Administrator\n";
                 }
             }
-            cout << "Press any key to continue...\n";
+            cout << "Press any key to continue...";
             getchar();
         }
