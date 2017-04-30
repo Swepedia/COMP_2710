@@ -425,6 +425,18 @@ StrPtr checkForClient(vector<Client> clients) {
         }
 
         void ScreenNormal::changePassword() {
+            bool success = false;
+            do {
+                cout << "New password: ";
+                string temp;
+                getline(cin, temp);
+                if(login -> at(userID).password == temp) {
+                    cout << "Your new password must be different!";
+                } else {
+                    login -> at(userID).password = temp;
+                    success = true;
+                }
+            } while(!success);
         }
 
 
