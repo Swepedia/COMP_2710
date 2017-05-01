@@ -3,11 +3,15 @@
 //@filename: Project2.cpp
 //
 //To Compile:
-//  g++ -o Project2 Project2.cpp
+//  run the 'make' command
+//
+//  -or-
+//
+//  g++ -std=c++11 -o Project2 Project2.cpp
 //
 //Resources:
 //  Absolute C++ 6th ed.
-//  code posted in specifications on how to mask the passwords with '*'
+//  C++ documentation on certain functions
 
 #include<iostream>
 #include<fstream>
