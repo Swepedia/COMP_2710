@@ -504,6 +504,7 @@ void saveAccounts(vector<Account> accounts) {
                         } while(success);
                         cout << "Press any key to coninue...";
                         getchar();
+                        break;
                     }
                 case 5:
                     {
@@ -534,6 +535,7 @@ void saveAccounts(vector<Account> accounts) {
                         cout << "Client and account information saved!\n";
                         cout << "Press any key to continue...";
                         getchar();
+                        break;
                     }
                 case 6:
                     return true;
