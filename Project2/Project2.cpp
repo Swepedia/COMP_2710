@@ -64,13 +64,6 @@ public:
     void staffDisplay();
 };
 
-//int login();
-/*
- * displays the login text
- * returns the option chosen:
- *      1)Login
- *      2)Quit
- */
 int menuDecider(int upper);
 /*
  * handles menu choices
@@ -394,19 +387,6 @@ void saveAccounts(vector<Account> accounts) {
                     {
                         Account tempAccount;
                         string temp;
-                        /*bool success = false;
-                        do {
-                            cout << "Choose a client: ";
-                            getline(cin, temp);
-                            for(int i = 0; i < clients->size(); i++) {
-                                if(clients->at(i).name == temp)
-                                    success = true;
-                            }
-                            if(!success)
-                                cout << "Error - client not in the system!\n";
-                        } while(!success);
-                        */
-
                         temp = (checkForClient(*clients))[0];
 
                         tempAccount.name = temp;
@@ -512,28 +492,6 @@ void saveAccounts(vector<Account> accounts) {
                     }
                 case 5:
                     {
-                        /*ofstream outputClients("clients");
-                        ofstream outputAccounts("accounts");
-                        if(outputClients.fail()) {
-                            cout << "Failed to save client information";
-                        }
-                        if(outputAccounts.fail()) {
-                            cout << "Failed to save Account information";
-                        }
-                        for(int i = 0; i < clients -> size(); i++) {
-                            outputClients << clients -> at(i).name << endl
-                                << clients -> at(i).address << endl
-                                << clients -> at(i).ssn << endl
-                                << clients -> at(i).employer << endl
-                                << clients -> at(i).income << endl;
-                        }
-                        for(int i = 0; i < accounts -> size(); i++) {
-                            outputAccounts << accounts -> at(i).name << endl
-                                << accounts -> at(i).accountNumber << endl
-                                << accounts -> at(i).accountType << endl
-                                << accounts -> at(i).balance << endl;
-                        }
-                        */
                         saveClients(*clients);
                         saveAccounts(*accounts);
                         cout << "Client and account information saved!\n";
